@@ -2,51 +2,51 @@
 
 namespace RoulRouter;
 
-class Route
+class Route 
 {
-    private array $routes = [];
-    public function __construct(
-        private string $requestUrl,
-        private string $requestMethod
-    ){}
-    public function get(string $url,$callback) : void 
+    private static array $routes = [];
+    public static function get(string $url, callable $callback) : void 
     {
-        $this->routes[] = ["get" , $url, $callback];
+        static::$routes[] = [$url , $callback, "get"];
     }
-    public function post(string $url,$callback) : void 
+    public static function get(string $url, callable $callback) : void 
     {
-        $this->routes[] = ["post" , $url, $callback];
+        static::$routes[] = [$url , $callback, "post"];
     }
-    public function put(string $url,$callback) : void 
+    public static function get(string $url, callable $callback) : void 
     {
-        $this->routes[] = ["put" , $url, $callback];
+        static::$routes[] = [$url , $callback, "put"];
     }
-    public function delete(string $url,$callback) : void 
+    public static function get(string $url, callable $callback) : void 
     {
-        $this->routes[] = ["delete" , $url, $callback];
+        static::$routes[] = [$url , $callback, "delete"];
     }
-    public function run()
+    public static function run() : mixed 
     {
-
+        $requestUrl = $_SERVER["REQUEST_URI"];
+        $requestMethod = strtolower($_SERVER["REQUEST_METHOD"]);
+        $requestUrl = trim($requestUrl,"/");
         $callback = null;
-
-        foreach($this->routes as $route){
-            $routeMethod = $route[0];
-            $routeUrl = $route[1];
-            $routeCallback = $route[2];
-
-            if($this->requestMethod == $routeMethod){
-                if($this->requestUrl == $routeUrl){
-                    $callback = $routeCallback;
-                    break;
-                }
+        $params = [];
+        foreach(static::$routes as $route){
+            $uri = $route[0];
+            $method = $route[2];
+            if($requestMethod != $method){
+                break;
+            }
+            $uri = trim($uri,"/");
+            
+            if(preg_match("%^{$uri}$%",$requestUrl,$matches)){
+                $callback = $route[1];
+                unset($matches[0]);
+                $params = $matches;
+                break;
             }
         }
-
         if($callback){
-            return call_user_func_array($callback, []);
+            return call_user_func_array($callback,$params);
         }
         echo "404";
+        return false;
     }
-
 }
