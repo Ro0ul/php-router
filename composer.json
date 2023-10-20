@@ -1,6 +1,6 @@
 {
     "name": "roul/router",
-    "description": "A Simple Router",
+    "description": "A Simple Router That supports Dynamic Routing and Have middleware Support",
     "type": "library",
     "license": "MIT",
     "autoload": {
