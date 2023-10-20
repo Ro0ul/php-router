@@ -1,7 +1,7 @@
 {
     "name": "roul/router",
     "description": "A Simple Router That supports Dynamic Routing and Have middleware Support",
-    "type": "library",
+    "type": "package",
     "license": "MIT",
     "autoload": {
         "psr-4": {
@@ -19,7 +19,7 @@
             "url": "https://github.com/Ro0ul/php-route"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "version":"1.0",
     "require": {
         "php" : ">=8.0"
