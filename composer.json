@@ -19,7 +19,8 @@
             "url": "https://github.com/Ro0ul/php-route"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
+    "version":"1.0"
     "require": {
         "php" : ">=8.0"
     }
