@@ -42,6 +42,14 @@ class Route
         static::$routes[] = [$url , $callback, "put"];
         return new Route();
     }
+     /**
+     * Register a PATCH Route
+     */
+    public static function patch(string $url, mixed $callback) : self 
+    {
+        static::$routes[] = [$url , $callback, "patch"];
+        return new Route();
+    }
 
     /**
      * Adds A Middleware To Your Route
@@ -55,10 +63,13 @@ class Route
     {
         static::$notFound = $callback;  
     }
-    public static function run() : mixed 
+    public static function run(
+        ?string $requestUrl = null,
+        ?string $requestMethod = null
+    ) : mixed 
     {
-        $requestUrl = $_SERVER["REQUEST_URI"];
-        $requestMethod = strtolower($_SERVER["REQUEST_METHOD"]);
+        $requestUrl = $requestUrl ?? $_SERVER["REQUEST_URI"];
+        $requestMethod = $requestMethod ?? strtolower($_SERVER["REQUEST_METHOD"]);
         $requestUrl = trim($requestUrl,"/");
         $callback = null;
         $params = [];
