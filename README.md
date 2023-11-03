@@ -1,6 +1,11 @@
 # php-router
 ## A Simple PHP Router , that i'm still working on .
 
+## Composer Usage
+```
+composer require roul/router
+```
+
 ### Usage
 ```php
 Route::get("/",function(){/*Do Something Here*/});
