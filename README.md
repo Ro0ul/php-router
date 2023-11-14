@@ -1,5 +1,19 @@
 # php-router
-## A Simple PHP Router , that i'm still working on .
+## A Library that calls a function When a user visit a specific URL  .
+## Prequesetries
+  * PHP Version >= 8.1
+  * Composer Installed
+
+## Enable Routing
+  To Enable Routing Follow These Steps : 
+  1. Add a .htaccess file within the same directory as the index.php file
+  2. Paste This :
+  ```apache
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+  ```
 
 ## Composer Usage
 ```
