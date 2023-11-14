@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 
-namespace RoulRouter;
+namespace Roul\Router;
 
 /**
  * Route
