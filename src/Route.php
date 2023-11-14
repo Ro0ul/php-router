@@ -96,7 +96,7 @@ class Route
                 return $class->handle($callback,$params); # You Can Modify How The function is called here 
             }
             if(is_callable($callback) or is_string($callback)){
-                return call_user_func($callback);  # You Can Modify How The function is called here 
+                return call_user_func($callback,$params);  # You Can Modify How The function is called here 
             }
             if(is_array($callback)){
                 [$class, $method] = $callback;
